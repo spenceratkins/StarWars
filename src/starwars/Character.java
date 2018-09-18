@@ -7,6 +7,8 @@ package starwars;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,7 +18,7 @@ public class Character {
     //Fields (Variables)
     private int x;
     private int y;
-    private int dx;
+    private int dx; //velo speed delta x 
     private int dy;
     private Color color;
     private int size; 
@@ -96,6 +98,16 @@ public class Character {
     
     
     //Public Methods
+    public class Barrier {
+        private String barrier = "barrier.png";
+        private int width;
+        private int height;
+        private boolean visible;
+        private Image image;
+        public Barrier (int x, int y) {
+            ImageIcon ii = new ImageIcon(this.getClass().getResource(barrier));
+        }
+    }
     public void draw (Graphics g) {
         g.setColor(color);
         g.fillRect (x,y,size,size);
@@ -116,7 +128,6 @@ public class Character {
      * Makes the character "bounce" and reverse direction on X axis 
      */
     public void reverseX() {
-        //TODO Implement this method
     }
     
     /**
@@ -135,7 +146,9 @@ public class Character {
     
     //Private Methods
     private void grow() {
-        size *= 1.04; 
+        
+        //size = (int) (Math.random()*10) - 4 ;
+        size *= 1.05;
     }
     
     private void canTeleport() {
