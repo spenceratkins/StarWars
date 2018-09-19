@@ -98,27 +98,17 @@ public class Character {
     
     
     //Public Methods
-    public class Barrier {
-        private String barrier = "barrier.png";
-        private int width;
-        private int height;
-        private boolean visible;
-        private Image image;
-        public Barrier (int x, int y) {
-            ImageIcon ii = new ImageIcon(this.getClass().getResource(barrier));
-        }
-    }
+    
     public void draw (Graphics g) {
         g.setColor(color);
         g.fillRect (x,y,size,size);
     }
-    public void kill() {
-        
-        grow();
+    public void kill(Character c) {
+        c.setSize(0);
     }
     public void move(int dx, int dy) {
-        x += dx * 3;
-        y += dy * 3;
+        x += dx * 5;
+        y += dy * 5;
     }
     public void update() {
         move(dx, dy);
@@ -128,13 +118,15 @@ public class Character {
      * Makes the character "bounce" and reverse direction on X axis 
      */
     public void reverseX() {
+       dx = -dx;
+       move(2 * dx, dy); 
     }
     
     /**
      * Makes the character "bounce" and reverse direction on Y axis 
      */
     public void reverseY() {
-        //TODO Implement this method
+         dy *= -1;
     }
     
     public void collect() {

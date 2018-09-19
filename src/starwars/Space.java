@@ -31,9 +31,9 @@ public class Space extends JPanel {
         marginX = 10; 
         marginY = 10;
         hero = new Hero(600,480, Color.BLUE, 20, "Dude");
-        enemy = new Enemy(50, 50, Color.RED, 20, "Enemy");
+        enemy = new Enemy(100, 100, Color.RED, 20, "Enemy");
         timer = new Timer();
-        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 100);
+        timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/60);
     }
     
     @Override
@@ -56,8 +56,11 @@ public class Space extends JPanel {
         public void run() {
             wallCollissions(hero);
             wallCollissions(enemy);
+           heroVsEnemy();
             hero.update();
             enemy.update();
+           
+            
             repaint();
             }
         }
@@ -110,6 +113,12 @@ public class Space extends JPanel {
       /**
      * Makes the hero and enemy bounce off walls
      */    
+    private void heroVsEnemy() {
+        
+       if (hero.getX()== enemy.getX()) {
+           hero.kill(enemy);
+       } 
+    } 
     private void wallCollissions(Character c) {
         //walls = this.getWidth(), this.getHeight(), 0
         //where the hero is = hero.getX(), hero.getY()
